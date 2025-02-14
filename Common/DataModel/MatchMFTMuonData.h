@@ -18,6 +18,7 @@ namespace o2::aod
 namespace matching_params
 {
 // matching parameters
+DECLARE_SOA_COLUMN(BCID, mBCID, int64_t);
 DECLARE_SOA_COLUMN(DeltaPt, mDeltaPt, float);
 DECLARE_SOA_COLUMN(DeltaEta, mDeltaEta, float);
 DECLARE_SOA_COLUMN(DeltaPhi, mDeltaPhi, float);
@@ -30,6 +31,7 @@ DECLARE_SOA_COLUMN(IsCorrectMatch, mIsCorrectMatch, bool);
 } // namespace matching_params
 
 DECLARE_SOA_TABLE(MatchParams, "AOD", "MATCHING",
+                  matching_params::BCID,
                   matching_params::GMuonPt,
                   matching_params::GMuonEta,
                   matching_params::PairQ,
@@ -40,9 +42,37 @@ DECLARE_SOA_TABLE(MatchParams, "AOD", "MATCHING",
                   matching_params::DeltaPhi,
                   matching_params::IsCorrectMatch);
 
+namespace mix_matching_params
+{
+// matching parameters
+DECLARE_SOA_COLUMN(BCID, mBCID, int64_t);
+DECLARE_SOA_COLUMN(DeltaPt, mDeltaPt, float);
+DECLARE_SOA_COLUMN(DeltaEta, mDeltaEta, float);
+DECLARE_SOA_COLUMN(DeltaPhi, mDeltaPhi, float);
+DECLARE_SOA_COLUMN(DeltaX, mDeltaX, float);
+DECLARE_SOA_COLUMN(DeltaY, mDeltaY, float);
+DECLARE_SOA_COLUMN(GMuonPt, mGMuonPt, float);
+DECLARE_SOA_COLUMN(GMuonEta, mGMuonEta, float);
+DECLARE_SOA_COLUMN(PairQ, mPairQ, int16_t);
+DECLARE_SOA_COLUMN(IsCorrectMatch, mIsCorrectMatch, bool);
+} // namespace mix_matching_params
+
+DECLARE_SOA_TABLE(MixMatchParams, "AOD", "MIXMATCHING",
+                  mix_matching_params::BCID,
+                  mix_matching_params::GMuonPt,
+                  mix_matching_params::GMuonEta,
+                  mix_matching_params::PairQ,
+                  mix_matching_params::DeltaPt,
+                  mix_matching_params::DeltaX,
+                  mix_matching_params::DeltaY,
+                  mix_matching_params::DeltaEta,
+                  mix_matching_params::DeltaPhi,
+                  mix_matching_params::IsCorrectMatch);
+
 namespace tag_matching_params
 {
 // matching parameters
+DECLARE_SOA_COLUMN(BCID, mBCID, int64_t);
 DECLARE_SOA_COLUMN(DeltaPt, mDeltaPt, float);
 DECLARE_SOA_COLUMN(DeltaEta, mDeltaEta, float);
 DECLARE_SOA_COLUMN(DeltaPhi, mDeltaPhi, float);
@@ -55,6 +85,7 @@ DECLARE_SOA_COLUMN(IsCorrectMatch, mIsCorrectMatch, bool);
 } // namespace tag_matching_params
 
 DECLARE_SOA_TABLE(TagMatchParams, "AOD", "TAGMATCHING",
+                  tag_matching_params::BCID,
                   tag_matching_params::GMuonPt,
                   tag_matching_params::GMuonEta,
                   tag_matching_params::PairQ,
@@ -68,6 +99,7 @@ DECLARE_SOA_TABLE(TagMatchParams, "AOD", "TAGMATCHING",
 namespace probe_matching_params
 {
 // matching parameters
+DECLARE_SOA_COLUMN(BCID, mBCID, int64_t);
 DECLARE_SOA_COLUMN(DeltaPt, mDeltaPt, float);
 DECLARE_SOA_COLUMN(DeltaEta, mDeltaEta, float);
 DECLARE_SOA_COLUMN(DeltaPhi, mDeltaPhi, float);
@@ -81,6 +113,7 @@ DECLARE_SOA_COLUMN(IsCorrectMatch, mIsCorrectMatch, bool);
 } // namespace probe_matching_params
 
 DECLARE_SOA_TABLE(ProbeMatchParams, "AOD", "PROBEMATCHING",
+                  probe_matching_params::BCID,
                   probe_matching_params::TagGMuonPt,
                   probe_matching_params::GMuonPt,
                   probe_matching_params::GMuonEta,
@@ -92,30 +125,34 @@ DECLARE_SOA_TABLE(ProbeMatchParams, "AOD", "PROBEMATCHING",
                   probe_matching_params::DeltaPhi,
                   probe_matching_params::IsCorrectMatch);
 
-namespace mix_matching_params
+namespace mix_probe_matching_params
 {
 // matching parameters
+DECLARE_SOA_COLUMN(BCID, mBCID, int64_t);
 DECLARE_SOA_COLUMN(DeltaPt, mDeltaPt, float);
 DECLARE_SOA_COLUMN(DeltaEta, mDeltaEta, float);
 DECLARE_SOA_COLUMN(DeltaPhi, mDeltaPhi, float);
 DECLARE_SOA_COLUMN(DeltaX, mDeltaX, float);
 DECLARE_SOA_COLUMN(DeltaY, mDeltaY, float);
+DECLARE_SOA_COLUMN(TagGMuonPt, mTagGMuonPt, float);
 DECLARE_SOA_COLUMN(GMuonPt, mGMuonPt, float);
 DECLARE_SOA_COLUMN(GMuonEta, mGMuonEta, float);
 DECLARE_SOA_COLUMN(PairQ, mPairQ, int16_t);
 DECLARE_SOA_COLUMN(IsCorrectMatch, mIsCorrectMatch, bool);
-} // namespace mix_matching_params
+} // namespace mix_probe_matching_params
 
-DECLARE_SOA_TABLE(MixMatchParams, "AOD", "MIXMATCHING",
-                  mix_matching_params::GMuonPt,
-                  mix_matching_params::GMuonEta,
-                  mix_matching_params::PairQ,
-                  mix_matching_params::DeltaPt,
-                  mix_matching_params::DeltaX,
-                  mix_matching_params::DeltaY,
-                  mix_matching_params::DeltaEta,
-                  mix_matching_params::DeltaPhi,
-                  mix_matching_params::IsCorrectMatch);
+DECLARE_SOA_TABLE(MixProbeMatchParams, "AOD", "MIXPROBEMATCHING",
+                  mix_probe_matching_params::BCID,
+                  mix_probe_matching_params::TagGMuonPt,
+                  mix_probe_matching_params::GMuonPt,
+                  mix_probe_matching_params::GMuonEta,
+                  mix_probe_matching_params::PairQ,
+                  mix_probe_matching_params::DeltaPt,
+                  mix_probe_matching_params::DeltaX,
+                  mix_probe_matching_params::DeltaY,
+                  mix_probe_matching_params::DeltaEta,
+                  mix_probe_matching_params::DeltaPhi,
+                  mix_probe_matching_params::IsCorrectMatch);
 
 namespace muon_pair
 {
@@ -131,5 +168,20 @@ DECLARE_SOA_TABLE(MuonPair, "AOD", "MUONPAIR",
                   muon_pair::Mass,
                   muon_pair::Pt,
                   muon_pair::Rap);
+
+namespace tag_and_probe_muon_pair
+{
+// matching parameters
+DECLARE_SOA_COLUMN(Mass, mMass, float);
+DECLARE_SOA_COLUMN(Pt, mPt, float);
+DECLARE_SOA_COLUMN(Rap, mRap, float);
+DECLARE_SOA_COLUMN(PairQ, mPairQ, int16_t);
+} // namespace tag_and_probe_muon_pair
+
+DECLARE_SOA_TABLE(TagProbeMuonPair, "AOD", "TAGPROBEMUONPAIR",
+                  tag_and_probe_muon_pair::PairQ,
+                  tag_and_probe_muon_pair::Mass,
+                  tag_and_probe_muon_pair::Pt,
+                  tag_and_probe_muon_pair::Rap);
 
 } // namespace o2::aod
