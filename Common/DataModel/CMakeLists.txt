@@ -23,6 +23,8 @@ o2physics_add_header_only_library(DataModel
                                           TrackSelectionTables.h
                                           McCollisionExtra.h
                                           Qvectors.h
+                                          MftMchMatchTruth.h
+                                          MatchPlaneResiduals.h
                                           MatchMFTFT0.h
                                           MftmchMatchingML.h
                                           ZDCExtra.h

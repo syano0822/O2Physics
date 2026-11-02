@@ -110,3 +110,12 @@ o2physics_target_root_dictionary(FFitWeights
         HEADERS FFitWeights.h
         LINKDEF FFitWeightsLinkDef.h)
 
+o2physics_add_header_only_library(GlobalMuonMatchingPlane
+    HEADERS GlobalMuonMatchingPlane.h
+    INTERFACE_LINK_LIBRARIES O2::GlobalTracking)
+
+# Shared data/MC workflow; neither entry point owns a separate matching kernel.
+o2physics_add_header_only_library(MftMchMatchingWorkflow
+    HEADERS MftMchMatchingWorkflow.h MftMchInference.h MftMchMatchAncestry.h MftMchEventMixing.h MftMchMixingAlignment.h MftMchMixingHistory.h
+    INTERFACE_LINK_LIBRARIES O2Physics::AnalysisCore O2Physics::DataModel
+                            O2::GlobalTracking O2::MCHGeometryTransformer O2Physics::PWGDQCore O2Physics::MLCore)
