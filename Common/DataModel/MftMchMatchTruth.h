@@ -9,23 +9,13 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
-// Propagation, conversions, timing and chi2 definitions based on
-// PWGDQ/Tasks/global-muon-matcher.cxx (0dfb35775). No realignment is applied here.
-// Phi residuals in angular chi2 are wrapped to [-pi, pi) for periodicity.
-/// \file MftMchMatchTruth.h
-/// \brief Shared MFT–MCH matching study utilities and output definitions.
-/// \author Satoshi Yano <satoshi.yano@cern.ch>
-
 #ifndef COMMON_DATAMODEL_MFTMCHMATCHTRUTH_H_
 #define COMMON_DATAMODEL_MFTMCHMATCHTRUTH_H_
 #include <Framework/AnalysisDataModel.h>
-
 #include <cstdint>
 #include <vector>
-namespace o2::aod
-{
-namespace mftmchmatchtruth
-{
+namespace o2::aod {
+namespace mftmchmatchtruth {
 DECLARE_SOA_COLUMN(ResidualRowId, residualRowId, int64_t);
 DECLARE_SOA_COLUMN(MchTrackId, mchTrackId, int64_t);
 DECLARE_SOA_COLUMN(MftTrackId, mftTrackId, int64_t);
@@ -51,31 +41,30 @@ DECLARE_SOA_COLUMN(MftMcPy, mftMcPy, float);
 DECLARE_SOA_COLUMN(MftMcPz, mftMcPz, float);
 DECLARE_SOA_COLUMN(MchPhysicalPrimary, mchPhysicalPrimary, bool);
 DECLARE_SOA_COLUMN(MftPhysicalPrimary, mftPhysicalPrimary, bool);
-} // namespace mftmchmatchtruth
+}
 DECLARE_SOA_TABLE(MftMchMatchTruths, "AOD", "FWDMPMCLBL",
-                  mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
-                  mftmchmatchtruth::MchMcParticleId, mftmchmatchtruth::MftMcParticleId,
-                  mftmchmatchtruth::HasMchMcParticle, mftmchmatchtruth::HasMftMcParticle, mftmchmatchtruth::IsCorrectMatch,
-                  mftmchmatchtruth::MchMcMask, mftmchmatchtruth::MftMcMask,
-                  mftmchmatchtruth::MchMcCollisionId, mftmchmatchtruth::MftMcCollisionId,
-                  mftmchmatchtruth::MchPdgCode, mftmchmatchtruth::MftPdgCode,
-                  mftmchmatchtruth::MchMcPx, mftmchmatchtruth::MchMcPy, mftmchmatchtruth::MchMcPz,
-                  mftmchmatchtruth::MftMcPx, mftmchmatchtruth::MftMcPy, mftmchmatchtruth::MftMcPz,
-                  mftmchmatchtruth::MchPhysicalPrimary, mftmchmatchtruth::MftPhysicalPrimary,
-                  mftmchmatchtruth::IsFalseMatch, mftmchmatchtruth::MatchTruthStatus);
+ mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
+ mftmchmatchtruth::MchMcParticleId, mftmchmatchtruth::MftMcParticleId,
+ mftmchmatchtruth::HasMchMcParticle, mftmchmatchtruth::HasMftMcParticle, mftmchmatchtruth::IsCorrectMatch,
+ mftmchmatchtruth::MchMcMask, mftmchmatchtruth::MftMcMask,
+ mftmchmatchtruth::MchMcCollisionId, mftmchmatchtruth::MftMcCollisionId,
+ mftmchmatchtruth::MchPdgCode, mftmchmatchtruth::MftPdgCode,
+ mftmchmatchtruth::MchMcPx, mftmchmatchtruth::MchMcPy, mftmchmatchtruth::MchMcPz,
+ mftmchmatchtruth::MftMcPx, mftmchmatchtruth::MftMcPy, mftmchmatchtruth::MftMcPz,
+ mftmchmatchtruth::MchPhysicalPrimary, mftmchmatchtruth::MftPhysicalPrimary,
+ mftmchmatchtruth::IsFalseMatch, mftmchmatchtruth::MatchTruthStatus);
 DECLARE_SOA_TABLE(MixedMftMchMatchTruths, "AOD", "FWDMPMIXLBL",
-                  mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
-                  mftmchmatchtruth::MchMcParticleId, mftmchmatchtruth::MftMcParticleId,
-                  mftmchmatchtruth::HasMchMcParticle, mftmchmatchtruth::HasMftMcParticle, mftmchmatchtruth::IsCorrectMatch,
-                  mftmchmatchtruth::MchMcMask, mftmchmatchtruth::MftMcMask,
-                  mftmchmatchtruth::MchMcCollisionId, mftmchmatchtruth::MftMcCollisionId,
-                  mftmchmatchtruth::MchPdgCode, mftmchmatchtruth::MftPdgCode,
-                  mftmchmatchtruth::MchMcPx, mftmchmatchtruth::MchMcPy, mftmchmatchtruth::MchMcPz,
-                  mftmchmatchtruth::MftMcPx, mftmchmatchtruth::MftMcPy, mftmchmatchtruth::MftMcPz,
-                  mftmchmatchtruth::MchPhysicalPrimary, mftmchmatchtruth::MftPhysicalPrimary,
-                  mftmchmatchtruth::IsFalseMatch, mftmchmatchtruth::MatchTruthStatus);
-namespace mftmchmatchrelation
-{
+ mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
+ mftmchmatchtruth::MchMcParticleId, mftmchmatchtruth::MftMcParticleId,
+ mftmchmatchtruth::HasMchMcParticle, mftmchmatchtruth::HasMftMcParticle, mftmchmatchtruth::IsCorrectMatch,
+ mftmchmatchtruth::MchMcMask, mftmchmatchtruth::MftMcMask,
+ mftmchmatchtruth::MchMcCollisionId, mftmchmatchtruth::MftMcCollisionId,
+ mftmchmatchtruth::MchPdgCode, mftmchmatchtruth::MftPdgCode,
+ mftmchmatchtruth::MchMcPx, mftmchmatchtruth::MchMcPy, mftmchmatchtruth::MchMcPz,
+ mftmchmatchtruth::MftMcPx, mftmchmatchtruth::MftMcPy, mftmchmatchtruth::MftMcPz,
+ mftmchmatchtruth::MchPhysicalPrimary, mftmchmatchtruth::MftPhysicalPrimary,
+ mftmchmatchtruth::IsFalseMatch, mftmchmatchtruth::MatchTruthStatus);
+namespace mftmchmatchrelation {
 DECLARE_SOA_COLUMN(PairOrigin, pairOrigin, int8_t);
 DECLARE_SOA_COLUMN(AncestryStatus, ancestryStatus, int);
 DECLARE_SOA_COLUMN(AncestryComplete, ancestryComplete, bool);
@@ -105,38 +94,38 @@ DECLARE_SOA_COLUMN(AncestryGeneratorFlags, ancestryGeneratorFlags, std::vector<u
 DECLARE_SOA_COLUMN(AncestryVertexX, ancestryVertexX, std::vector<float>);
 DECLARE_SOA_COLUMN(AncestryVertexY, ancestryVertexY, std::vector<float>);
 DECLARE_SOA_COLUMN(AncestryVertexZ, ancestryVertexZ, std::vector<float>);
-} // namespace mftmchmatchrelation
+}
 // Row-aligned with MatchPlaneResiduals, DownstreamMatchPlaneResiduals and MftMchMatchTruths.
 DECLARE_SOA_TABLE(MftMchMatchRelations, "AOD", "FWDMPMCREL",
-                  mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
-                  mftmchmatchrelation::PairOrigin,
-                  mftmchmatchrelation::AncestryStatus,
-                  mftmchmatchrelation::AncestryComplete,
-                  mftmchmatchrelation::IsMchMuon,
-                  mftmchmatchrelation::IsMftAncestorOfMch,
-                  mftmchmatchrelation::IsMftToMuonDecay,
-                  mftmchmatchrelation::IsDirectMftToMuonDecay,
-                  mftmchmatchrelation::AncestryDepth,
-                  mftmchmatchrelation::MchMcProcess,
-                  mftmchmatchrelation::MftMcProcess,
-                  mftmchmatchrelation::MchProducedByGenerator,
-                  mftmchmatchrelation::MftProducedByGenerator,
-                  mftmchmatchrelation::MchMcVertexX,
-                  mftmchmatchrelation::MchMcVertexY,
-                  mftmchmatchrelation::MchMcVertexZ,
-                  mftmchmatchrelation::MftMcVertexX,
-                  mftmchmatchrelation::MftMcVertexY,
-                  mftmchmatchrelation::MftMcVertexZ,
-                  mftmchmatchrelation::MchMotherIds,
-                  mftmchmatchrelation::MchMotherPdgs,
-                  mftmchmatchrelation::MftMotherIds,
-                  mftmchmatchrelation::MftMotherPdgs,
-                  mftmchmatchrelation::AncestryIds,
-                  mftmchmatchrelation::AncestryPdgs,
-                  mftmchmatchrelation::AncestryProcesses,
-                  mftmchmatchrelation::AncestryGeneratorFlags,
-                  mftmchmatchrelation::AncestryVertexX,
-                  mftmchmatchrelation::AncestryVertexY,
-                  mftmchmatchrelation::AncestryVertexZ);
+ mftmchmatchtruth::ResidualRowId, mftmchmatchtruth::MchTrackId, mftmchmatchtruth::MftTrackId,
+ mftmchmatchrelation::PairOrigin,
+ mftmchmatchrelation::AncestryStatus,
+ mftmchmatchrelation::AncestryComplete,
+ mftmchmatchrelation::IsMchMuon,
+ mftmchmatchrelation::IsMftAncestorOfMch,
+ mftmchmatchrelation::IsMftToMuonDecay,
+ mftmchmatchrelation::IsDirectMftToMuonDecay,
+ mftmchmatchrelation::AncestryDepth,
+ mftmchmatchrelation::MchMcProcess,
+ mftmchmatchrelation::MftMcProcess,
+ mftmchmatchrelation::MchProducedByGenerator,
+ mftmchmatchrelation::MftProducedByGenerator,
+ mftmchmatchrelation::MchMcVertexX,
+ mftmchmatchrelation::MchMcVertexY,
+ mftmchmatchrelation::MchMcVertexZ,
+ mftmchmatchrelation::MftMcVertexX,
+ mftmchmatchrelation::MftMcVertexY,
+ mftmchmatchrelation::MftMcVertexZ,
+ mftmchmatchrelation::MchMotherIds,
+ mftmchmatchrelation::MchMotherPdgs,
+ mftmchmatchrelation::MftMotherIds,
+ mftmchmatchrelation::MftMotherPdgs,
+ mftmchmatchrelation::AncestryIds,
+ mftmchmatchrelation::AncestryPdgs,
+ mftmchmatchrelation::AncestryProcesses,
+ mftmchmatchrelation::AncestryGeneratorFlags,
+ mftmchmatchrelation::AncestryVertexX,
+ mftmchmatchrelation::AncestryVertexY,
+ mftmchmatchrelation::AncestryVertexZ);
 } // namespace o2::aod
 #endif

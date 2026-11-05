@@ -9,12 +9,7 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
-/// \file match-mft-mch-data.cxx
-/// \brief Produce MFT–MCH matching samples and evaluate frozen matching models for data.
-/// \author Satoshi Yano <satoshi.yano@cern.ch>
-
-#include "Common/Core/MftMchMatchingWorkflow.h"
-
+#include "Common/Core/MftMchMatching.h"
 #include <Framework/runDataProcessing.h>
 
 o2::framework::WorkflowSpec defineDataProcessing(o2::framework::ConfigContext const& cfgc)

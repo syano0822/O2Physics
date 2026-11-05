@@ -9,21 +9,13 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
-/// \file match-mft-mch-data-mc.cxx
-/// \brief Run the shared matching workflow and annotate its output with MC truth.
-/// \author Satoshi Yano <satoshi.yano@cern.ch>
-
-#include "Common/Core/MftMchMatchAncestry.h"
-#include "Common/Core/MftMchMatchingWorkflow.h"
+#include "Common/Core/MftMchMatching.h"
 #include "Common/DataModel/MftMchMatchTruth.h"
-
-#include <Framework/runDataProcessing.h>
-
 #include <TMCProcess.h>
-
-#include <limits>
 #include <unordered_map>
 #include <vector>
+#include <Framework/runDataProcessing.h>
+#include <limits>
 
 using namespace o2;
 using namespace o2::framework;

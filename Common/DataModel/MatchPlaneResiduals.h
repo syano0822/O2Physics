@@ -9,13 +9,6 @@
 // granted to it by virtue of its status as an Intergovernmental Organization
 // or submit itself to any jurisdiction.
 
-// Propagation, conversions, timing and chi2 definitions based on
-// PWGDQ/Tasks/global-muon-matcher.cxx (0dfb35775). No realignment is applied here.
-// Phi residuals in angular chi2 are wrapped to [-pi, pi) for periodicity.
-/// \file MatchPlaneResiduals.h
-/// \brief Shared MFT–MCH matching study utilities and output definitions.
-/// \author Satoshi Yano <satoshi.yano@cern.ch>
-
 #ifndef COMMON_DATAMODEL_MATCHPLANERESIDUALS_H_
 #define COMMON_DATAMODEL_MATCHPLANERESIDUALS_H_
 #include <Framework/AnalysisDataModel.h>
@@ -95,28 +88,25 @@ DECLARE_SOA_TABLE(DownstreamMatchPlaneResiduals, "AOD", "FWDMPDOWN",
                   matchplaneresidual::AbsorberStepCm,
                   matchplaneresidual::TransportStatus);
 
-namespace matchplanemixing
-{
+namespace matchplanemixing {
 DECLARE_SOA_COLUMN(MixingStreamId, mixingStreamId, uint64_t);
 DECLARE_SOA_COLUMN(TargetFrameId, targetFrameId, uint64_t);
 DECLARE_SOA_COLUMN(DonorFrameId, donorFrameId, uint64_t);
-} // namespace matchplanemixing
+}
 // Optional diagnostic matrices; row-major 5x5. No change to matching.
-namespace matchplanemixdiag
-{
+namespace matchplanemixdiag {
 DECLARE_SOA_COLUMN(IsMixed, isMixed, bool);
 DECLARE_SOA_COLUMN(MchCov, mchCov, std::vector<double>);
 DECLARE_SOA_COLUMN(MftCov, mftCov, std::vector<double>);
 DECLARE_SOA_COLUMN(ResidualCov, residualCov, std::vector<double>);
-} // namespace matchplanemixdiag
+}
 DECLARE_SOA_TABLE(MftMchMixingDiagnostics, "AOD", "FWDMPMIXDG",
                   matchplaneresidual::MchTrackId, matchplaneresidual::MftTrackId,
                   matchplaneresidual::MatchingPlaneZ, matchplanemixdiag::IsMixed,
                   matchplanemixdiag::MchCov, matchplanemixdiag::MftCov, matchplanemixdiag::ResidualCov,
                   matchplanemixing::TargetFrameId, matchplanemixing::DonorFrameId, matchplanemixing::MixingStreamId);
 // Mixed rows use independent tables; both planes carry source IDs and pool diagnostics.
-namespace matchplanemixing
-{
+namespace matchplanemixing {
 DECLARE_SOA_COLUMN(DonorMchTrackId, donorMchTrackId, int64_t);
 DECLARE_SOA_COLUMN(DonorCollisionId, donorCollisionId, int64_t);
 DECLARE_SOA_COLUMN(MixedGroupIndex, mixedGroupIndex, int);
@@ -145,7 +135,7 @@ DECLARE_SOA_COLUMN(RetainedMftStates, retainedMftStates, uint64_t);
 DECLARE_SOA_COLUMN(EvictedEvents, evictedEvents, uint64_t);
 DECLARE_SOA_COLUMN(OversizedEvents, oversizedEvents, uint64_t);
 DECLARE_SOA_COLUMN(PoolWasReset, poolWasReset, bool);
-} // namespace matchplanemixing
+}
 // One state row per input DF, including empty/rejected DFs. Also synchronizes
 // MC label-cache lifetime with the exact donor-history frames owned upstream.
 DECLARE_SOA_TABLE(MftMchMixingPoolStates, "AOD", "FWDMPMIXPS",
@@ -154,7 +144,7 @@ DECLARE_SOA_TABLE(MftMchMixingPoolStates, "AOD", "FWDMPMIXPS",
                   matchplanemixing::EvictedEvents, matchplanemixing::OversizedEvents,
                   matchplanemixing::PoolWasReset, matchplanemixing::MixingStreamId);
 DECLARE_SOA_TABLE(RawMixedMatchPlaneResiduals, "AOD", "FWDMPMIXRAW",
-                  matchplaneresidual::MchTrackId,
+matchplaneresidual::MchTrackId,
                   matchplaneresidual::MftTrackId,
                   matchplaneresidual::MchCollisionId,
                   matchplaneresidual::MftCollisionId,
@@ -206,7 +196,7 @@ DECLARE_SOA_TABLE(RawMixedMatchPlaneResiduals, "AOD", "FWDMPMIXRAW",
                   matchplanemixing::MixingWeight,
                   matchplanemixing::TargetFrameId, matchplanemixing::DonorFrameId, matchplanemixing::MixingStreamId);
 DECLARE_SOA_TABLE(MixedMatchPlaneResiduals, "AOD", "FWDMPMIX",
-                  matchplaneresidual::MchTrackId,
+matchplaneresidual::MchTrackId,
                   matchplaneresidual::MftTrackId,
                   matchplaneresidual::MchCollisionId,
                   matchplaneresidual::MftCollisionId,
@@ -427,8 +417,7 @@ DECLARE_SOA_TABLE(MchDimuonsPV, "AOD", "FWDMCHPAIR",
                   mchdimuonpv::Px2, mchdimuonpv::Py2, mchdimuonpv::Pz2,
                   mchdimuonpv::Mass, mchdimuonpv::PairPt, mchdimuonpv::PairRapidity);
 // ML selections are reconstructed from real-data observables only.
-namespace mlmatchedpv
-{
+namespace mlmatchedpv {
 DECLARE_SOA_COLUMN(FrameId, frameId, uint64_t);
 DECLARE_SOA_COLUMN(MlGoodScore, mlGoodScore, double);
 DECLARE_SOA_COLUMN(HasMftCovariance, hasMftCovariance, bool);
@@ -441,7 +430,7 @@ DECLARE_SOA_COLUMN(MftTrackId1, mftTrackId1, int64_t);
 DECLARE_SOA_COLUMN(MftTrackId2, mftTrackId2, int64_t);
 DECLARE_SOA_COLUMN(MlGoodScore1, mlGoodScore1, double);
 DECLARE_SOA_COLUMN(MlGoodScore2, mlGoodScore2, double);
-} // namespace mlmatchedpv
+}
 DECLARE_SOA_TABLE(MlMatchedMuonsPV, "AOD", "FWDMLMUONPV",
                   mlmatchedpv::FrameId, mchdimuonpv::CollisionId, matchplaneresidual::MchTrackId, matchplaneresidual::MftTrackId,
                   mlmatchedpv::MlGoodScore, mlmatchedpv::HasMftCovariance, mlmatchedpv::Status,
@@ -455,8 +444,7 @@ DECLARE_SOA_TABLE(MlMatchedDimuonsPV, "AOD", "FWDMLPAIRPV",
 
 // Raw-pair alignment QA; MC can reject a raw mixed pair later. Join the final
 // mixed table by (MchTrackId,MftTrackId,MatchingPlaneZ,DonorMchTrackId).
-namespace mixedalignment
-{
+namespace mixedalignment {
 DECLARE_SOA_COLUMN(Applied, applied, bool);
 DECLARE_SOA_COLUMN(Status, status, int);
 DECLARE_SOA_COLUMN(DonorTransportStatus, donorTransportStatus, int);
@@ -467,7 +455,7 @@ DECLARE_SOA_COLUMN(AnchorDelta, anchorDelta, std::vector<double>);
 DECLARE_SOA_COLUMN(ResidualBefore, residualBefore, std::vector<double>);
 DECLARE_SOA_COLUMN(Rotation, rotation, std::vector<double>);
 DECLARE_SOA_COLUMN(DonorSeedMomentum, donorSeedMomentum, double);
-} // namespace mixedalignment
+}
 DECLARE_SOA_TABLE(MftMchMixedAlignments, "AOD", "FWDMPMIXAL",
                   matchplaneresidual::MchTrackId, matchplaneresidual::MftTrackId,
                   matchplanemixing::DonorMchTrackId, matchplaneresidual::MatchingPlaneZ,
@@ -497,7 +485,7 @@ DECLARE_SOA_COLUMN(SeedMchCrossCov, seedMchCrossCov, std::vector<double>);
 DECLARE_SOA_COLUMN(PairJacobian, pairJacobian, std::vector<double>);
 DECLARE_SOA_COLUMN(UpstreamSigmaELoss, upstreamSigmaELoss, double);
 DECLARE_SOA_COLUMN(JacobianScale, jacobianScale, double);
-} // namespace mftmchpaircov
+}
 DECLARE_SOA_TABLE(MftMchPairCovariances, "AOD", "FWDMPPAIRCV",
                   mftmchpaircov::MchTrackId,
                   mftmchpaircov::MftTrackId,
@@ -516,20 +504,19 @@ DECLARE_SOA_TABLE(MftMchPairCovariances, "AOD", "FWDMPPAIRCV",
                   mftmchpaircov::PairJacobian,
                   mftmchpaircov::UpstreamSigmaELoss,
                   mftmchpaircov::JacobianScale);
-namespace selectedmatchingmuon
-{
-DECLARE_SOA_COLUMN(Method, method, int8_t);     // 0=MCHPV,1=chi2,2=ML
-DECLARE_SOA_COLUMN(Score, score, double);       // chi2 or good-source score; MCHPV NaN
+namespace selectedmatchingmuon {
+DECLARE_SOA_COLUMN(Method, method, int8_t); // 0=MCHPV,1=chi2,2=ML
+DECLARE_SOA_COLUMN(Score, score, double); // chi2 or good-source score; MCHPV NaN
 DECLARE_SOA_COLUMN(RawScore, rawScore, double); // chi2 or good logit; MCHPV NaN
 DECLARE_SOA_COLUMN(DcaX, dcaX, double);
 DECLARE_SOA_COLUMN(DcaY, dcaY, double);
 DECLARE_SOA_COLUMN(DcaZ, dcaZ, double);
-} // namespace selectedmatchingmuon
+}
 DECLARE_SOA_TABLE(SelectedMatchingMuons, "AOD", "FWDEVALMUON",
-                  mlmatchedpv::FrameId, mchdimuonpv::CollisionId, matchplaneresidual::MchTrackId, matchplaneresidual::MftTrackId,
-                  selectedmatchingmuon::Method, selectedmatchingmuon::Score, selectedmatchingmuon::RawScore,
-                  mlmatchedpv::Charge, mlmatchedpv::Px, mlmatchedpv::Py, mlmatchedpv::Pz,
-                  selectedmatchingmuon::DcaX, selectedmatchingmuon::DcaY, selectedmatchingmuon::DcaZ);
+ mlmatchedpv::FrameId, mchdimuonpv::CollisionId, matchplaneresidual::MchTrackId, matchplaneresidual::MftTrackId,
+ selectedmatchingmuon::Method, selectedmatchingmuon::Score, selectedmatchingmuon::RawScore,
+ mlmatchedpv::Charge, mlmatchedpv::Px, mlmatchedpv::Py, mlmatchedpv::Pz,
+ selectedmatchingmuon::DcaX, selectedmatchingmuon::DcaY, selectedmatchingmuon::DcaZ);
 
 } // namespace o2::aod
 #endif // COMMON_DATAMODEL_MATCHPLANERESIDUALS_H_
